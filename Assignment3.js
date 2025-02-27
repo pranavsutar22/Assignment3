@@ -1,10 +1,9 @@
 function validateForm() {
-    // Clear previous error messages
+    
     clearErrors();
 
     let isValid = true;
 
-    // Full Name validation
     const fullname = document.getElementById('fullname').value.trim();
     if (fullname === "") {
         showError('nameError', "Full name is required.");
@@ -15,14 +14,14 @@ function validateForm() {
             showError('nameError', "Please enter your first and last name.");
             isValid = false;
         } else {
-            // Split full name into first, middle, and last name
+           
             document.getElementById('firstname').value = nameParts[0];
             document.getElementById('middlename').value = nameParts.length > 2 ? nameParts[1] : "";
             document.getElementById('lastname').value = nameParts[nameParts.length - 1];
         }
     }
 
-    // Aadhar number validation (12 digits)
+  
     const aadhar = document.getElementById('aadhar').value.trim();
     const aadharPattern = /^\d{12}$/;
     if (!aadharPattern.test(aadhar)) {
@@ -30,7 +29,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // PAN card validation (10 alphanumeric characters)
+   
     const pan = document.getElementById('pan').value.trim();
     const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
     if (!panPattern.test(pan)) {
@@ -38,7 +37,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Mobile number validation (10 digits)
+
     const mobile = document.getElementById('mobile').value.trim();
     const mobilePattern = /^[6-9]\d{9}$/;
     if (!mobilePattern.test(mobile)) {
@@ -46,7 +45,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Date of Birth validation (should be older than 18 years)
+ 
     const dob = document.getElementById('dob').value;
     const dobDate = new Date(dob);
     const age = new Date().getFullYear() - dobDate.getFullYear();
@@ -55,7 +54,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Marks validation
+  
     const marks = [];
     for (let i = 1; i <= 6; i++) {
         const subjectMarks = parseInt(document.getElementById(`subject${i}`).value.trim());
@@ -86,12 +85,12 @@ function calculatePercentage() {
         marks.push(subjectMarks);
     }
 
-    // Sort marks and calculate the best of five
-    marks.sort((a, b) => b - a); // Sort in descending order
+   
+    marks.sort((a, b) => b - a); 
     const bestOfFiveMarks = marks.slice(0, 5);
     const total = bestOfFiveMarks.reduce((sum, mark) => sum + mark, 0);
     const percentage = (total / 500) * 100;
 
-    // Display result
+ 
     document.getElementById('percentageResult').innerText = `Best of Five Percentage: ${percentage.toFixed(2)}%`;
 }
